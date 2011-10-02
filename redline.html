@@ -2,15 +2,22 @@
     <head>
         <meta http-equiv="Content-type" content="text/html; charset=utf-8">
         <title>redline</title>
-        <script type="text/javascript" src="http://code.jquery.com/jquery-1.5.2.min.js"></script>
-        <script type="text/javascript" src="jquery.csv.js"></script>
+        <script type="text/javascript" src="http://code.jquery.com/jquery-1.6.4.min.js"></script>   
         <script type="text/javascript" src="date.js"></script>
         <script type="text/javascript" src="mbta.js"></script>
         <script type="text/javascript" src="http://timeago.yarp.com/jquery.timeago.js"></script>
         <link rel="stylesheet" href="mbta.css" type="text/css" media="screen" charset="utf-8">
     </head>
     <body>
-        <table id='timetable'>
+        <script type="text/javascript" charset="utf-8">
+        $(document).ready( function() {
+            var url = 'http://developer.mbta.com/Data/Red.json';
+            $.getJSON( url, function(data) {
+                populate_table($('table#redline'), data)
+            });
+        });
+        </script>
+        <table class='timetable' id='redline'>
             <tr>
                 <th class='PlatformKey' id='RKENN'>Kendall</td>
                 <th class='PlatformKey' id='RCENN'>Central</td>
@@ -20,6 +27,5 @@
                 <th class='PlatformKey' id='RALEN'>Alewife</td>
             </tr>
         </table>
-            
     </body>
 </html>

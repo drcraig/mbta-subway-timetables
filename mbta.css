@@ -2,7 +2,15 @@ body {
     font-family: sans-serif;
 }
 
-table#timetable td {
+table.timetable th {
+    margin: 1em;
+}
+
+table.timetable td, table.timetable th {
     padding: 0em 0.5em;
     text-align: center;
+}
+
+abbr.timeago {
+    border-bottom: 0px;
 }
