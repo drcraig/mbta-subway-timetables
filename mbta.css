@@ -1,0 +1,8 @@
+body {
+    font-family: sans-serif;
+}
+
+table#timetable td {
+    padding: 0em 0.5em;
+    text-align: center;
+}
