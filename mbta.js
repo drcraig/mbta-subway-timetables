@@ -36,9 +36,10 @@ var populate_table = function ($table, data) {
         });
 
         // Create a row in the table for each train
+        $table.find('tr.arrival').remove();
         for( var i in tripsFromStart) {
             var trip = trips[tripsFromStart[i].Trip]
-            var $row = $("<tr></tr>");
+            var $row = $("<tr class='arrival'></tr>");
             for( j in platformKeys ) {
                 var platformKey = platformKeys[j];
                 var station = trip[platformKey];

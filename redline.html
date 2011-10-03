@@ -1,8 +1,9 @@
 <html>
     <head>
         <meta http-equiv="Content-type" content="text/html; charset=utf-8">
-        <title>redline</title>
+        <title>Red Line</title>
         <script type="text/javascript" src="http://code.jquery.com/jquery-1.6.4.min.js"></script>   
+        <script type="text/javascript" src="jquery.idle-timer.js"></script>
         <script type="text/javascript" src="date.js"></script>
         <script type="text/javascript" src="mbta.js"></script>
         <script type="text/javascript" src="http://timeago.yarp.com/jquery.timeago.js"></script>
@@ -11,13 +12,26 @@
     <body>
         <script type="text/javascript" charset="utf-8">
         $(document).ready( function() {
-            var url = '/mbta/Data/red.json?callback=?';
-            $.getJSON( url, function(data) {
-                populate_table($('table#redline'), data)
-            });
+            var update = function() {
+                var url = '/mbta/Data/red.json?callback=?';
+                $.getJSON( url, function(data) {
+                    populate_table($('table#redline-outbound'), data);
+                    populate_table($('table#redline-inbound'), data);
+                });
+            }
+            update();
+
+            $.idleTimer(30000);
+            var updateInterval = setInterval( function () {
+                if ($.data(document, 'idleTimer') === 'active') {
+                    update();
+                }
+            }, 60000);
         });
         </script>
-        <table class='timetable' id='redline'>
+
+        <h2>Red Line Northbound</h2>
+        <table class='timetable' id='redline-outbound'>
             <tr>
                 <th class='PlatformKey' id='RKENN'>Kendall</td>
                 <th class='PlatformKey' id='RCENN'>Central</td>
@@ -25,6 +39,17 @@
                 <th class='PlatformKey' id='RPORN'>Porter</td>
                 <th class='PlatformKey' id='RDAVN'>Davis</td>
                 <th class='PlatformKey' id='RALEN'>Alewife</td>
+            </tr>
+        </table>
+        
+        <h2>Red Line Southbound</h2>
+        <table class='timetable' id='redline-inbound'>
+            <tr>
+                <th class='PlatformKey' id='RKENS'>Kendall</td>
+                <th class='PlatformKey' id='RMGHS'>Charles/MGH</td>
+                <th class='PlatformKey' id='RPRKS'>Park St.</td>
+                <th class='PlatformKey' id='RDTCS'>Downtown Crossing</td>
+                <th class='PlatformKey' id='RSOUS'>South Station</td>
             </tr>
         </table>
     </body>
