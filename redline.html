@@ -11,7 +11,7 @@
     <body>
         <script type="text/javascript" charset="utf-8">
         $(document).ready( function() {
-            var url = 'http://developer.mbta.com/Data/Red.json';
+            var url = '/mbta/Data/red.json?callback=?';
             $.getJSON( url, function(data) {
                 populate_table($('table#redline'), data)
             });
