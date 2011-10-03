@@ -11,6 +11,10 @@ table.timetable td, table.timetable th {
     text-align: center;
 }
 
+.timetable tr:nth-child(even) {
+  background: #EEEEEE;
+}
+
 abbr.timeago {
     border-bottom: 0px;
 }
