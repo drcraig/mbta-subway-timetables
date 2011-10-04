@@ -14,8 +14,8 @@ var populate_table = function ($table, data) {
 
     // Sort those by the time they arrive at the starting station
     tripsFromStart.sort( function (a,b) {
-        var da = Date.parse(a.Time);
-        var db = Date.parse(b.Time);
+        var da = new Date(Date.parse(a.Time));
+        var db = new Date(Date.parse(b.Time));
         if ( da > db ) return 1;
         if ( da < db ) return -1;
         return 0;
@@ -43,8 +43,12 @@ var populate_table = function ($table, data) {
             for( j in platformKeys ) {
                 var platformKey = platformKeys[j];
                 var station = trip[platformKey];
-                var time = Date.parse(station.Time);
-                var $cell = $("<td>"+time.toString("h:mm tt")+"</td>");
+                time = new Date(Date.parse(station.Time));
+
+                var amPm = (time.getHours() > 11) ? "PM" : "AM";
+                var hours = time.getHours() % 12;
+                var minutes = (time.getMinutes() < 10) ? "0"+time.getMinutes() : ""+time.getMinutes();
+                var $cell = $("<td>"+hours+":"+minutes+" "+amPm+"</td>");
                 $cell.append('<br />')
                 $cell.append('<abbr class="timeago" title="'+time.toISOString()+'">'+station.TimeRemaining+'<abbr>');
                 $row.append($cell);
