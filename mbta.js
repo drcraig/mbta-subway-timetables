@@ -46,7 +46,7 @@ var populate_table = function ($table, data) {
                 time = new Date(Date.parse(station.Time));
 
                 var amPm = (time.getHours() > 11) ? "PM" : "AM";
-                var hours = time.getHours() % 12;
+                var hours = time.getHours() === 0 ? 12 : time.getHours() % 12;
                 var minutes = (time.getMinutes() < 10) ? "0"+time.getMinutes() : ""+time.getMinutes();
                 var $cell = $("<td>"+hours+":"+minutes+" "+amPm+"</td>");
                 $cell.append('<br />')
